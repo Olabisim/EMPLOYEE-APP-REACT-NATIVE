@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Image} from "react-native";
+import { StyleSheet, Text, View, Image, FlatList} from "react-native";
 import { Card } from "react-native-paper";
 
 
@@ -10,12 +10,16 @@ const Home = () => {
                 {id: 2, name: "rukesh", position: "android dev"},
                 {id: 3, name: "tukesh", position: "ML expert"},
                 {id: 4, name: "sukesh", position: "web dev"},
+                {id: 5, name: "sukesh", position: "web dev"},
+                {id: 6, name: "sukesh", position: "web dev"},
+                {id: 7, name: "sukesh", position: "web dev"},
+                {id: 8, name: "sukesh", position: "web dev"},
         ]
 
-        const renderList = data.map((item, key) => {
+        const renderList = ((item) => {
 
                 return (
-                        <Card style =  {styles.mycard} key= {item.key}>
+                        <Card style =  {styles.mycard}>
 
                                 <View style = {styles.cardView}>
                                         <Image 
@@ -45,9 +49,15 @@ const Home = () => {
         return (
                 <View>
                        
-                               
-                                {renderList}
-
+                        <FlatList 
+                        
+                                data = {data}
+                                renderItem={({item}) => {
+                                        return renderList(item)
+                                }}
+                                keyExtractor={item => item.id}
+                        
+                        />
                 
                 </View>
         )
