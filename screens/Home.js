@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, FlatList} from "react-native";
-import { Card } from "react-native-paper";
+import { Card, FAB } from "react-native-paper";
 
 
 const Home = () => {
@@ -14,6 +14,10 @@ const Home = () => {
                 {id: 6, name: "sukesh", position: "web dev"},
                 {id: 7, name: "sukesh", position: "web dev"},
                 {id: 8, name: "sukesh", position: "web dev"},
+                {id: 9, name: "sukesh", position: "web dev"},
+                {id: 10, name: "sukesh", position: "web dev"},
+                {id: 11, name: "sukesh", position: "web dev"},
+                {id: 12, name: "sukesh", position: "web dev"},
         ]
 
         const renderList = ((item) => {
@@ -58,6 +62,14 @@ const Home = () => {
                                 keyExtractor={item => item.id}
                         
                         />
+
+                        <FAB
+                                style={styles.fab}
+                                small
+                                icon="plus"
+                                onPress={() => console.log('Pressed')}
+                                theme={{colors: {accent: "#000"}}}
+                        />
                 
                 </View>
         )
@@ -74,7 +86,13 @@ const styles = StyleSheet.create({
         textView: {
                 fontSize: 16,
                 margin: 3
-        }
+        },
+        fab: {
+                position: 'absolute',
+                margin: 16,
+                right: 0,
+                bottom: 0,
+        },
 
 })
 
