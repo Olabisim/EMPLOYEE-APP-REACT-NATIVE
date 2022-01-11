@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet } from "react-native";
-import { TextInput } from 'react-native-paper';
+import { Text, View, StyleSheet, Modal } from "react-native";
+import { TextInput, Button } from 'react-native-paper';
 
 
 
@@ -55,7 +55,53 @@ const CreateEmployee = () => {
                                 mode = "outlined"
                                 onChangeText={ text => setSalary(text)}
                         />
+
+                        <Button   
+                                style={styles.inputStyle}       
+                                icon="camera" 
+                                mode="contained" 
+                                theme={theme}
+                                onPress={() => setModal(true)}
+                        >
+                                Upload Image
+                        </Button>
+
+                        <Button   
+                                style={styles.inputStyle}       
+                                icon="content-save" 
+                                mode="contained" 
+                                theme={theme}
+                                onPress={() => console.log("saved")}
+                        >
+                                Save
+                        </Button>
                 
+                        <Modal
+                                animationType='slide'
+                                transparent= {true}
+                                visible={modal}
+                                // this is when you press the back button on your phonw that is onRequest
+                                onRequestClose={() => setModal(false)}
+                        >
+                                <View style={styles.modalView}>
+                                        <View style={styles.modalButtonView}>
+                                                {/* <Button theme={theme} icon="camera" mode="contained" onPress={() => setModal(false)}> */}
+                                                
+                                                <Button theme={theme} icon="camera" mode="contained" onPress={() => console.log("pressed")}>
+                                                        camera
+                                                </Button>
+                                                <Button theme={theme} icon="image-area" mode="contained" onPress={() => console.log("pressed")}>
+                                                        gallery
+                                                </Button>
+                                                
+                                        </View>
+
+                                        <Button onPress={() => setModal(false)}>
+                                                cancel
+                                        </Button>
+                                </View>
+                        
+                        </Modal>
                 </View>
         )
 }
@@ -72,6 +118,18 @@ const styles = StyleSheet.create({
         },
         inputStyle: {
                 margin: 5
+        },
+        modalView: {
+                position: 'absolute',
+                bottom: 2,
+                width: '100%',
+                backgroundColor: "blue"
+
+        },
+        modalButtonView: {
+                flexDirection: 'row',
+                justifyContent: "center",
+                padding: 10
         }
 })
 
