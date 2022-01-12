@@ -1,0 +1,2 @@
+https://docs.expo.dev/versions/latest/sdk/imagepicker/
+https://reactnavigation.org/docs/5.x/stack-navigator

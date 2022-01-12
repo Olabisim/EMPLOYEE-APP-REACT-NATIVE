@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet, Modal } from "react-native";
+import { Text, View, StyleSheet, Modal, Alert } from "react-native";
 import { TextInput, Button } from 'react-native-paper';
+import * as ImagePicker from 'expo-image-picker';
+import * as Permissions from "expo-permissions";
 
 
 
@@ -15,6 +17,44 @@ const CreateEmployee = () => {
         const [position,setPosition] = useState("position")
         const [modal,setModal] = useState(false)
         const [enableshift,setenableShift] = useState(false)
+
+
+        const pickFromGallery = async () => {
+
+                const {granted} = await Permissions.askAsync(Permissions.CAMERA_ROLL)
+
+                if(granted) {
+                        let data = await ImagePicker.launchImageLibraryAsync({
+                                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                                allowsEditing: true,
+                                aspect: [1,1],
+                                quality: 0.5
+                        })
+                        console.log(data)
+                }
+                else {
+                        Alert.alert("you need to give us permission to work")
+                }
+        }
+
+
+        const pickFromCamera = async () => {
+
+                const {granted} = await Permissions.askAsync(Permissions.CAMERA)
+
+                if(granted) {
+                        let data = await ImagePicker.launchCameraAsync({
+                                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                                allowsEditing: true,
+                                aspect: [1,1],
+                                quality: 0.5
+                        })
+                        console.log(data)
+                }
+                else {
+                        Alert.alert("you need to give us permission to work")
+                }
+        }
 
 
         return (
@@ -87,10 +127,10 @@ const CreateEmployee = () => {
                                         <View style={styles.modalButtonView}>
                                                 {/* <Button theme={theme} icon="camera" mode="contained" onPress={() => setModal(false)}> */}
                                                 
-                                                <Button theme={theme} icon="camera" mode="contained" onPress={() => console.log("pressed")}>
+                                                <Button theme={theme} icon="camera" mode="contained" onPress={() => pickFromCamera()}>
                                                         camera
                                                 </Button>
-                                                <Button theme={theme} icon="image-area" mode="contained" onPress={() => console.log("pressed")}>
+                                                <Button theme={theme} icon="image-area" mode="contained" onPress={() => pickFromGallery()}>
                                                         gallery
                                                 </Button>
                                                 
