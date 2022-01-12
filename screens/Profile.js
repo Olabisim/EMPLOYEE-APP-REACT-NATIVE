@@ -1,11 +1,24 @@
 import React from "react";
-import {View, Text, StyleSheet, Image } from "react-native";
+import {View, Text, StyleSheet, Image, Linking, Platform } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Title, Card, Button } from "react-native-paper";
 import { MaterialIcons, Entypo } from '@expo/vector-icons';
 
 
 const Profile = () => {
+
+        const openDial = () => {
+
+                if(Platform.OS === "android") {
+                        Linking.openURL("tel:12345")
+                }
+                else {
+                        Linking.openURL("telprompt:12345")
+                }
+
+        }
+
+
         return (
                 <View style={styles.root}>
 
@@ -34,7 +47,7 @@ const Profile = () => {
                         
                         </View>
 
-                        <Card style={styles.mycard}>
+                        <Card style={styles.mycard} onPress={() => Linking.openURL("mailto:abc@abc.com")}>
                         
                                 <View style={styles.cardContent}>
                                 
