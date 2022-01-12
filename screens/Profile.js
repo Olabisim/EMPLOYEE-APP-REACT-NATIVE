@@ -9,7 +9,10 @@ import { MaterialIcons, Entypo } from '@expo/vector-icons';
 // There's an error with the profile page so the opendial connecting with the tel: stuff
 // 
 
-const Profile = () => {
+const Profile = (props) => {
+
+        // try to change this to inner destructuring 
+        const { id, name, picture, phone, salary, email, position} = props.route.params.item;
 
         const openDial = () => {
 
@@ -38,7 +41,7 @@ const Profile = () => {
                                 <Image 
                                 
                                         style={{width:140, height: 140, borderRadius: 140/2, marginTop: -50}}
-                                        source={{uri: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60'}}
+                                        source={{uri: picture}}
                                 
                                 />
                         
@@ -46,8 +49,8 @@ const Profile = () => {
 
                         <View style={{alignItems: "center", margin: 15}}>
                         
-                                <Title>Ajoseh Olabisi</Title>
-                                <Text style={{fontSize: 15}}>web developer</Text>
+                                <Title>{name}</Title>
+                                <Text style={{fontSize: 15}}>{position}</Text>
                         
                         </View>
 
@@ -56,7 +59,7 @@ const Profile = () => {
                                 <View style={styles.cardContent}>
                                 
                                         <MaterialIcons name="email" size={32} color="blue" />
-                                        <Text style={styles.mytext}>abc@abc.com</Text>
+                                        <Text style={styles.mytext}>{email}</Text>
 
                                 </View>
                         
@@ -67,7 +70,7 @@ const Profile = () => {
                                 <View style={styles.cardContent} onPress={openDial}>
                                 
                                         <Entypo name="phone" size={32} color="blue" />
-                                        <Text style={styles.mytext}>123456</Text>
+                                        <Text style={styles.mytext}>{phone}</Text>
 
                                 </View>
                         
@@ -78,7 +81,7 @@ const Profile = () => {
                                 <View style={styles.cardContent}>
                                 
                                         <MaterialIcons name="attach-money" size={32} color="blue" />
-                                        <Text style={styles.mytext}>8 LPA</Text>
+                                        <Text style={styles.mytext}>{salary}</Text>
 
                                 </View>
                 
