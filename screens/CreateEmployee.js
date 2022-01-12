@@ -96,7 +96,7 @@ const CreateEmployee = () => {
                                                 
                                         </View>
 
-                                        <Button onPress={() => setModal(false)}>
+                                        <Button onPress={() => setModal(false)} style={{color: "white"}}>
                                                 cancel
                                         </Button>
                                 </View>
@@ -108,7 +108,7 @@ const CreateEmployee = () => {
 
 const theme = {
         colors: {
-                primary: "blue"
+                primary: "white"
         }
 }
 
@@ -121,15 +121,17 @@ const styles = StyleSheet.create({
         },
         modalView: {
                 position: 'absolute',
-                bottom: 2,
+                bottom: 0,
                 width: '100%',
-                backgroundColor: "blue"
+                backgroundColor: "blue",
+                // margin: 10
 
         },
         modalButtonView: {
                 flexDirection: 'row',
                 justifyContent: "center",
-                padding: 10
+                padding: 15,
+                // margin: 10
         }
 })
 

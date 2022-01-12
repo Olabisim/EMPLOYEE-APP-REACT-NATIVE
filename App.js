@@ -9,7 +9,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 
-const stack = createStackNavigator();
+const Stack = createStackNavigator();
 
 const myOptions = {
 	title: "My Sweet Home",

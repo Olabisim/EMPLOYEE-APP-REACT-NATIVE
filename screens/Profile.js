@@ -5,6 +5,10 @@ import { Title, Card, Button } from "react-native-paper";
 import { MaterialIcons, Entypo } from '@expo/vector-icons';
 
 
+// 
+// There's an error with the profile page so the opendial connecting with the tel: stuff
+// 
+
 const Profile = () => {
 
         const openDial = () => {
@@ -24,7 +28,7 @@ const Profile = () => {
 
                         <LinearGradient 
 
-                                colors={["blue", "green"]}
+                                colors={["blue", "navy"]}
                                 style={{height: '20%'}}
 
                         />
@@ -60,7 +64,7 @@ const Profile = () => {
 
                         <Card style={styles.mycard}>
                         
-                                <View style={styles.cardContent}>
+                                <View style={styles.cardContent} onPress={openDial}>
                                 
                                         <Entypo name="phone" size={32} color="blue" />
                                         <Text style={styles.mytext}>123456</Text>
