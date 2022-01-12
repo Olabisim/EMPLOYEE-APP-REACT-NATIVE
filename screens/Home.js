@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image, FlatList} from "react-native";
 import { Card, FAB } from "react-native-paper";
 
 
-const Home = () => {
+const Home = (props) => {
 
         const data = [ 
                 {id: 1, name: "mukesh", position: "web dev"},
@@ -51,7 +51,7 @@ const Home = () => {
         })
 
         return (
-                <View>
+                <View style={{flex: 1}}>
                        
                         <FlatList 
                         
@@ -67,7 +67,7 @@ const Home = () => {
                                 style={styles.fab}
                                 small
                                 icon="plus"
-                                onPress={() => console.log('Pressed')}
+                                onPress={() => props.navigation.navigate("Create")}
                                 theme={{colors: {accent: "#000"}}}
                         />
                 
