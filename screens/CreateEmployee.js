@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Text, View, StyleSheet, Modal, Alert } from "react-native";
 import { TextInput, Button } from 'react-native-paper';
 import * as ImagePicker from 'expo-image-picker';
-import * as Permissions from "expo-permissions";
+// import * as Permissions from 'expo-permissions';
 
 
 
@@ -21,9 +21,9 @@ const CreateEmployee = () => {
 
         const pickFromGallery = async () => {
 
-                const {granted} = await Permissions.askAsync(Permissions.CAMERA_ROLL)
+                // const {granted} = await Permissions.askAsync(Permissions.CAMERA_ROLL)
 
-                if(granted) {
+                // if(granted) {
                         let data = await ImagePicker.launchImageLibraryAsync({
                                 mediaTypes: ImagePicker.MediaTypeOptions.Images,
                                 allowsEditing: true,
@@ -39,38 +39,38 @@ const CreateEmployee = () => {
                                 }
                                 handleUpload(newfile)
                         }
-                }
-                else {
-                        Alert.alert("you need to give us permission to work")
-                }
+                // }
+                // else {
+                //         Alert.alert("you need to give us permission to work")
+                // }
         }
 
 
-        const pickFromCamera = async () => {
+        // const pickFromCamera = async () => {
 
-                const {granted} = await Permissions.askAsync(Permissions.CAMERA)
+        //         const {granted} = await Permissions.askAsync(Permissions.CAMERA)
 
-                if(granted) {
-                        let data = await ImagePicker.launchCameraAsync({
-                                mediaTypes: ImagePicker.MediaTypeOptions.Images,
-                                allowsEditing: true,
-                                aspect: [1,1],
-                                quality: 0.5
-                        })
-                        if(!data.cancelled) {
-                                let newfile = {
+        //         if(granted) {
+        //                 let data = await ImagePicker.launchCameraAsync({
+        //                         mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        //                         allowsEditing: true,
+        //                         aspect: [1,1],
+        //                         quality: 0.5
+        //                 })
+        //                 if(!data.cancelled) {
+        //                         let newfile = {
 
-                                        uri: data.uri,
-                                        type: `test/${data.uri.split(".")[1]}`,
-                                        name: `test.${data.uri.split(".")[1]}`
-                                }
-                                handleUpload(newfile)
-                        }
-                }
-                else {
-                        Alert.alert("you need to give us permission to work")
-                }
-        }
+        //                                 uri: data.uri,
+        //                                 type: `test/${data.uri.split(".")[1]}`,
+        //                                 name: `test.${data.uri.split(".")[1]}`
+        //                         }
+        //                         handleUpload(newfile)
+        //                 }
+        //         }
+        //         else {
+        //                 Alert.alert("you need to give us permission to work")
+        //         }
+        // }
 
 
         const handleUpload = (image) => {
@@ -136,7 +136,7 @@ const CreateEmployee = () => {
                         <Button   
                                 style={styles.inputStyle}    
                                 // picture will automatically be false if it empty   
-                                icon={picture ? "upload" : "check"}
+                                icon={picture == "" ? "upload" : "check"}
                                 mode="contained" 
                                 theme={theme}
                                 onPress={() => setModal(true)}
