@@ -30,7 +30,15 @@ const CreateEmployee = () => {
                                 aspect: [1,1],
                                 quality: 0.5
                         })
-                        console.log(data)
+                        if(!data.cancelled) {
+                                let newfile = {
+
+                                        uri: data.uri,
+                                        type: `test/${data.uri.split(".")[1]}`,
+                                        name: `test.${data.uri.split(".")[1]}`
+                                }
+                                handleUpload(newfile)
+                        }
                 }
                 else {
                         Alert.alert("you need to give us permission to work")
@@ -49,11 +57,40 @@ const CreateEmployee = () => {
                                 aspect: [1,1],
                                 quality: 0.5
                         })
-                        console.log(data)
+                        if(!data.cancelled) {
+                                let newfile = {
+
+                                        uri: data.uri,
+                                        type: `test/${data.uri.split(".")[1]}`,
+                                        name: `test.${data.uri.split(".")[1]}`
+                                }
+                                handleUpload(newfile)
+                        }
                 }
                 else {
                         Alert.alert("you need to give us permission to work")
                 }
+        }
+
+
+        const handleUpload = (image) => {
+                const data = new FormData()
+                data.append('file', image)
+                data.append('upload_preset', 'employeeApp')
+                data.append("cloud_name", "olabisiminasu")
+
+                fetch("https://api.cloudinary.com/v1_1/olabisiminasu/image/upload", {
+
+                        method: "post",
+                        body: data
+
+                })
+                .then(res => res.json())
+                .then(data => {
+                        console.log(data);
+                        setPicture(data.url)
+                        setModal(false)
+                })
         }
 
 
@@ -97,8 +134,9 @@ const CreateEmployee = () => {
                         />
 
                         <Button   
-                                style={styles.inputStyle}       
-                                icon="camera" 
+                                style={styles.inputStyle}    
+                                // picture will automatically be false if it empty   
+                                icon={picture ? "upload" : "check"}
                                 mode="contained" 
                                 theme={theme}
                                 onPress={() => setModal(true)}
