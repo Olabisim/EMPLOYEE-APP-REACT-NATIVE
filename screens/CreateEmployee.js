@@ -17,6 +17,7 @@ const CreateEmployee = () => {
         const [position,setPosition] = useState("position")
         const [modal,setModal] = useState(false)
         const [enableshift,setenableShift] = useState(false)
+        
 
 
         const pickFromGallery = async () => {
@@ -46,31 +47,31 @@ const CreateEmployee = () => {
         }
 
 
-        // const pickFromCamera = async () => {
+        const pickFromCamera = async () => {
 
-        //         const {granted} = await Permissions.askAsync(Permissions.CAMERA)
+                const {status} = await ImagePicker.requestCameraPermissionsAsync()
 
-        //         if(granted) {
-        //                 let data = await ImagePicker.launchCameraAsync({
-        //                         mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        //                         allowsEditing: true,
-        //                         aspect: [1,1],
-        //                         quality: 0.5
-        //                 })
-        //                 if(!data.cancelled) {
-        //                         let newfile = {
+                if(status == "granted") {
+                        let data = await ImagePicker.launchCameraAsync({
+                                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                                allowsEditing: true,
+                                aspect: [1,1],
+                                quality: 0.5
+                        })
+                        if(!data.cancelled) {
+                                let newfile = {
 
-        //                                 uri: data.uri,
-        //                                 type: `test/${data.uri.split(".")[1]}`,
-        //                                 name: `test.${data.uri.split(".")[1]}`
-        //                         }
-        //                         handleUpload(newfile)
-        //                 }
-        //         }
-        //         else {
-        //                 Alert.alert("you need to give us permission to work")
-        //         }
-        // }
+                                        uri: data.uri,
+                                        type: `test/${data.uri.split(".")[1]}`,
+                                        name: `test.${data.uri.split(".")[1]}`
+                                }
+                                handleUpload(newfile)
+                        }
+                }
+                else {
+                        Alert.alert("you need to give us permission to work")
+                }
+        }
 
 
         const handleUpload = (image) => {
