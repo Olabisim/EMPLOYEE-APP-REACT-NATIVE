@@ -13,7 +13,7 @@ const CreateEmployee = () => {
         const [phone,setPhone] = useState("phone")
         const [email,setEmail] = useState("email")
         const [salary,setSalary] = useState("salary")
-        const [picture,setPicture] = useState("picture")
+        const [picture,setPicture] = useState("")
         const [position,setPosition] = useState("position")
         const [modal,setModal] = useState(false)
         const [enableshift,setenableShift] = useState(false)
@@ -21,7 +21,7 @@ const CreateEmployee = () => {
 
         const submitData = () => {
 
-                fetch("http://8074-129-205-124-100.eu.ngrok.io/send-data", {
+                fetch("http://a0d4-129-205-124-100.eu.ngrok.io/send-data", {
                         method: "post",
                         headers: {
                                 'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ const CreateEmployee = () => {
                 .then(response => {
                         response.json()
                 })
-                .then(data => console.log("success ", data))
+                .then(data => console.log("success " + data))
                 .catch(error => console.log(error))
                 
         }
