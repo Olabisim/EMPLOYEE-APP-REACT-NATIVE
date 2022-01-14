@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet, Modal, Alert } from "react-native";
+import { Text, View, StyleSheet, Modal, Alert, KeyboardAvoidingView } from "react-native";
 import { TextInput, Button } from 'react-native-paper';
 import * as ImagePicker from 'expo-image-picker';
 // import * as Permissions from 'expo-permissions';
@@ -19,7 +19,7 @@ const CreateEmployee = () => {
         const [enableshift,setenableShift] = useState(false)
 
 
-        const submitData = () => {
+        const submitData = ({navigation}) => {
 
                 fetch("http://a0d4-129-205-124-100.eu.ngrok.io/send-data", {
                         method: "post",
@@ -39,7 +39,10 @@ const CreateEmployee = () => {
                 .then(response => {
                         response.json()
                 })
-                .then(data => console.log("success " + data))
+                .then(data => {
+                        Alert.alert(`${data.name} is saved successfully`)
+                        navigation.navigate("Home")
+                })
                 .catch(error => console.log(error))
                 
         }
@@ -123,6 +126,10 @@ const CreateEmployee = () => {
 
         return (
                 <View style={StyleSheet.root}>
+
+                        <KeyboardAvoidingView>
+                        
+                        
 
                         <TextInput 
                                 label = "Name"
@@ -216,6 +223,8 @@ const CreateEmployee = () => {
                                 </View>
                         
                         </Modal>
+                        
+                        </KeyboardAvoidingView>
                 </View>
         )
 }

@@ -12,7 +12,7 @@ import { MaterialIcons, Entypo } from '@expo/vector-icons';
 const Profile = (props) => {
 
         // try to change this to inner destructuring 
-        const { id, name, picture, phone, salary, email, position} = props.route.params.item;
+        const { _id, name, picture, phone, salary, email, position} = props.route.params.item;
 
         const openDial = () => {
 

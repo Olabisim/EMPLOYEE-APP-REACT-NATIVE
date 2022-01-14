@@ -1,15 +1,29 @@
-import React from "react";
-import { StyleSheet, Text, View, Image, FlatList} from "react-native";
+import React, { useEffect, useState} from "react";
+import { StyleSheet, Text, View, Image, FlatList, ActivityIndicator} from "react-native";
 import { Card, FAB } from "react-native-paper";
 
 
 const Home = ({navigation}) => {
 
-        const data = [ 
-                {id: '1', name: "mukesh", email: "mukesh@abc.com", salary: "5 lpa", phone: "123", position: "web dev", picture: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60"},
-                {id: '2', name: "ramesh", email: "ramesh@abc.com", salary: "6 lpa", phone: "456", position: "app dev", picture: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60"},
-                {id: '3', name: "suresh", email: "suresh@abc.com", salary: "7 lpa", phone: "789", position: "ml expert", picture: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60"},
-        ]
+       const [data, setData] = useState([])
+       const [loading, setLoading] = useState(true)
+
+       useEffect(() => {
+
+                fetch("http://a0d4-129-205-124-100.eu.ngrok.io/")
+
+                .then(res => res.json())
+
+                .then(results => {
+                        
+                        console.log(results)
+                        setData(results)
+                        setLoading(false)
+
+                })
+                .catch(error => console.log(error))
+
+       }, [])
 
         const renderList = ((item) => {
 
@@ -25,8 +39,8 @@ const Home = ({navigation}) => {
                                 <View style = {styles.cardView}>
                                         <Image 
                                         
-                                                style={{width: 50, height: 50, borderRadius: 50/2}}
-                                                source={{uri: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60"}}
+                                                style={{w_idth: 50, height: 50, borderRadius: 50/2}}
+                                                source={{uri: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ix_id=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60"}}
 
                                         />
 
@@ -49,25 +63,32 @@ const Home = ({navigation}) => {
 
         return (
                 <View style={{flex: 1}}>
+                        
+                       {
+                               loading
+                               ?
+                               <ActivityIndicator />
+                               :
+                               
+                                <FlatList 
+                                
+                                        data = {data}
+                                        renderItem={({item}) => {       
+                                                return renderList(item)
+                                        }}
+                                        keyExtractor={item => item._id}
+                        
+                                />
+                       }
                        
-                        <FlatList 
-                        
-                                data = {data}
-                                renderItem={({item}) => {
-                                        return renderList(item)
-                                }}
-                                keyExtractor={item => item.id}
-                        
-                        />
-
-                        <FAB
+                       <FAB
                                 style={styles.fab}
                                 small
                                 icon="plus"
                                 onPress={() => navigation.navigate("Create")}
                                 theme={{colors: {accent: "#000"}}}
                         />
-                
+
                 </View>
         )
 }
