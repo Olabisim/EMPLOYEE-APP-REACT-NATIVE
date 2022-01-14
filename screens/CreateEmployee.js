@@ -17,6 +17,32 @@ const CreateEmployee = () => {
         const [position,setPosition] = useState("position")
         const [modal,setModal] = useState(false)
         const [enableshift,setenableShift] = useState(false)
+
+
+        const submitData = () => {
+
+                fetch("http://8074-129-205-124-100.eu.ngrok.io/send-data", {
+                        method: "post",
+                        headers: {
+                                'Content-Type': 'application/json',
+                              },
+                        body: JSON.stringify({
+                                // also that they are objects that is name: name
+                                name,
+                                email,
+                                salary,
+                                picture,
+                                position,
+                                phone
+                        })
+                })
+                .then(response => {
+                        response.json()
+                })
+                .then(data => console.log("success ", data))
+                .catch(error => console.log(error))
+                
+        }
         
 
 
@@ -133,6 +159,15 @@ const CreateEmployee = () => {
                                 mode = "outlined"
                                 onChangeText={ text => setSalary(text)}
                         />
+                        <TextInput 
+                                label = "Position"
+                                style={styles.inputStyle}
+                                value = {position}
+                                theme = {theme}
+                                keyboardType='number-pad'
+                                mode = "outlined"
+                                onChangeText={ text => setPosition(text)}
+                        />
 
                         <Button   
                                 style={styles.inputStyle}    
@@ -150,7 +185,7 @@ const CreateEmployee = () => {
                                 icon="content-save" 
                                 mode="contained" 
                                 theme={theme}
-                                onPress={() => console.log("saved")}
+                                onPress={() => submitData()}
                         >
                                 Save
                         </Button>
