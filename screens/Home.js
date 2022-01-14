@@ -39,8 +39,8 @@ const Home = ({navigation}) => {
                                 <View style = {styles.cardView}>
                                         <Image 
                                         
-                                                style={{w_idth: 50, height: 50, borderRadius: 50/2}}
-                                                source={{uri: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ix_id=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60"}}
+                                                style={{width: 50, height: 50, borderRadius: 50/2}}
+                                                source={{uri: item.picture}}
 
                                         />
 
@@ -67,7 +67,7 @@ const Home = ({navigation}) => {
                        {
                                loading
                                ?
-                               <ActivityIndicator />
+                               <ActivityIndicator size="large" color="#00ff00" />
                                :
                                
                                 <FlatList 
