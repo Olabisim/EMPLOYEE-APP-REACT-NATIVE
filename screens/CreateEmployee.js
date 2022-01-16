@@ -21,7 +21,7 @@ const CreateEmployee = () => {
 
         const submitData = ({navigation}) => {
 
-                fetch("http://a0d4-129-205-124-100.eu.ngrok.io/send-data", {
+                fetch("http://2767-129-205-124-94.eu.ngrok.io/send-data", {
                         method: "post",
                         headers: {
                                 'Content-Type': 'application/json',
@@ -121,15 +121,15 @@ const CreateEmployee = () => {
                         setPicture(data.url)
                         setModal(false)
                 })
+                .catch(err => {
+                        Alert.alert("error while uploading")
+                })
         }
 
 
         return (
-                <View style={StyleSheet.root}>
+                <View style={styles.root}>
 
-                        <KeyboardAvoidingView>
-                        
-                        
 
                         <TextInput 
                                 label = "Name"
@@ -157,6 +157,10 @@ const CreateEmployee = () => {
                                 mode = "outlined"
                                 onChangeText={ text => setPhone(text)}
                         />
+
+                        
+                        <KeyboardAvoidingView behavior="position">
+
                         <TextInput 
                                 label = "Salary"
                                 style={styles.inputStyle}
@@ -225,6 +229,7 @@ const CreateEmployee = () => {
                         </Modal>
                         
                         </KeyboardAvoidingView>
+
                 </View>
         )
 }

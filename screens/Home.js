@@ -1,5 +1,5 @@
 import React, { useEffect, useState} from "react";
-import { StyleSheet, Text, View, Image, FlatList, ActivityIndicator} from "react-native";
+import { StyleSheet, Text, View, Image, FlatList, ActivityIndicator, Alert} from "react-native";
 import { Card, FAB } from "react-native-paper";
 
 
@@ -8,22 +8,28 @@ const Home = ({navigation}) => {
        const [data, setData] = useState([])
        const [loading, setLoading] = useState(true)
 
+       const fetchData = () => {
+
+                fetch("http://2767-129-205-124-94.eu.ngrok.io")
+
+                        .then(res => res.json())
+        
+                        .then(results => {
+                                
+                                // console.log(results)
+                                setData(results)
+                                setLoading(false)
+        
+                        })
+                        .catch(error => Alert.alert("something went wrong"))
+       }
+
        useEffect(() => {
 
-                fetch("http://a0d4-129-205-124-100.eu.ngrok.io/")
-
-                .then(res => res.json())
-
-                .then(results => {
-                        
-                        console.log(results)
-                        setData(results)
-                        setLoading(false)
-
-                })
-                .catch(error => console.log(error))
+                fetchData()
 
        }, [])
+
 
         const renderList = ((item) => {
 
@@ -63,13 +69,13 @@ const Home = ({navigation}) => {
 
         return (
                 <View style={{flex: 1}}>
-                        
+                {/*        
                        {
                                loading
                                ?
                                <ActivityIndicator size="large" color="#00ff00" />
                                :
-                               
+                */} 
                                 <FlatList 
                                 
                                         data = {data}
@@ -77,9 +83,12 @@ const Home = ({navigation}) => {
                                                 return renderList(item)
                                         }}
                                         keyExtractor={item => item._id}
+                                        onRefresh={() => submitData()}
+                                        // refreshing is a boolean value
+                                        refreshing= {loading}
                         
                                 />
-                       }
+                       {/*   } */}
                        
                        <FAB
                                 style={styles.fab}
