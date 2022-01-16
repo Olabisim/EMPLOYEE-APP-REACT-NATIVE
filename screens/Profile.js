@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Text, StyleSheet, Image, Linking, Platform } from "react-native";
+import {View, Text, StyleSheet, Image, Linking, Platform, Alert } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Title, Card, Button } from "react-native-paper";
 import { MaterialIcons, Entypo } from '@expo/vector-icons';
@@ -9,10 +9,36 @@ import { MaterialIcons, Entypo } from '@expo/vector-icons';
 // There's an error with the profile page so the opendial connecting with the tel: stuff
 // 
 
+
+
+
 const Profile = (props) => {
 
         // try to change this to inner destructuring 
         const { _id, name, picture, phone, salary, email, position} = props.route.params.item;
+
+
+        const fireEmployee = (id) => {
+
+                fetch('http://2767-129-205-124-94.eu.ngrok.io/delete', {
+        
+                        method: "POST",
+                        headers: {
+                                'Content-Type': 'application/json',
+                              },
+                        // the backend is just id while the _id is the present one
+                        body: JSON.stringify({id: _id}),
+                            
+                })      
+                .then (res => res.json())
+                .then(deleteEmp => {
+                        Alert.alert(`${deleteEmp.name} deleted`)
+                        props.navigation.navigate("Home")
+                })
+                .catch(error => Alert.alert(error))
+        
+        }
+        
 
         const openDial = () => {
 
@@ -93,7 +119,7 @@ const Profile = (props) => {
                                         Edit
                                 </Button>
 
-                                <Button icon="delete" mode="contained" theme={theme} onPress={() => console.log('Pressed')}>
+                                <Button icon="delete" mode="contained" theme={theme} onPress={() => fireEmployee()}>
                                         Fire employee
                                 </Button>
 

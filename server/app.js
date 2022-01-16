@@ -103,7 +103,7 @@ app.post("/delete", ( req, res) => {
                 console.log(data)
                 res.send(data)
         })
-        .catch(err => console.log(error))
+        .catch(err => console.log(err))
 
 })
 
