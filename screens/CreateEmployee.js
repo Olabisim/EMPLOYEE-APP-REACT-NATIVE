@@ -7,15 +7,36 @@ import {ngrok_link} from '../ngrok'
 
 
 
-const CreateEmployee = ( { navigation : {navigate} } ) => {
+const CreateEmployee = ( { navigation : {navigate}, route } ) => {
 
-        
-        const [ name, setName ] = useState("name")
-        const [phone,setPhone] = useState("phone")
-        const [email,setEmail] = useState("email")
-        const [salary,setSalary] = useState("salary")
-        const [picture,setPicture] = useState("")
-        const [position,setPosition] = useState("position")
+        const getDetails = (type) => {
+                if(route.params) {
+                        switch(type) {
+                                case "name":
+                                        return route.params.name
+                                case "phone":
+                                        return route.params.phone
+                                case "email":
+                                        return route.params.email
+                                case "salary":
+                                        return route.params.salary
+                                case "picture":
+                                        return route.params.picture
+                                case "position":
+                                        return route.params.position
+                                
+                        }
+                }
+                return ""
+        }
+
+
+        const [ name, setName ] = useState(getDetails("name"))
+        const [phone,setPhone] = useState(getDetails("phone"))
+        const [email,setEmail] = useState(getDetails("email"))
+        const [salary,setSalary] = useState(getDetails("salary"))
+        const [picture,setPicture] = useState(getDetails("picture"))
+        const [position,setPosition] = useState(getDetails("position"))
         const [modal,setModal] = useState(false)
         const [enableshift,setenableShift] = useState(false)
 
@@ -47,6 +68,35 @@ const CreateEmployee = ( { navigation : {navigate} } ) => {
                 
         }
         
+
+        const updateDetails = () => {
+
+                fetch(ngrok_link + "update", {
+
+                        method: "POST",
+                        headers: {
+                                'Content-Type': 'application/json',
+                              },
+                        body: JSON.stringify({
+                                id: route.params._id,
+                                name,
+                                email,
+                                salary,
+                                picture,
+                                position,
+                                phone
+                        })
+
+                })
+                .then(res => res.json())
+
+                .then(data => {
+                        Alert.alert(`${data.name} is updated successfully`)
+                        navigate("Home")
+                        console.log('Success:', data);
+                      })
+                .catch(err => Alert.alert(err))
+        }
 
 
         const pickFromGallery = async () => {
@@ -191,15 +241,35 @@ const CreateEmployee = ( { navigation : {navigate} } ) => {
                                 Upload Image
                         </Button>
 
-                        <Button   
+                        {
+                                route.params
+
+                                ?
+
+                                <Button   
+                                style={styles.inputStyle}       
+                                icon="content-save" 
+                                mode="contained" 
+                                theme={theme}
+                                onPress={() => updateDetails()}
+                                >
+                                        Update details 
+                                </Button>
+
+                                :
+
+                                <Button   
                                 style={styles.inputStyle}       
                                 icon="content-save" 
                                 mode="contained" 
                                 theme={theme}
                                 onPress={() => submitData()}
-                        >
-                                Save
-                        </Button>
+                                >
+                                        Save
+                                </Button>
+                        }
+
+                        
                 
                         <Modal
                                 animationType='slide'

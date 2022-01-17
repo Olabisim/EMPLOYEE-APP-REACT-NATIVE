@@ -116,7 +116,13 @@ const Profile = (props) => {
 
                         <View style={{flexDirection:"row", justifyContent:"space-around", padding: 10}}>
                         
-                                <Button icon="account-edit" mode="contained" theme={theme} onPress={() => console.log('Pressed')}>
+                                <Button icon="account-edit" mode="contained" theme={theme} 
+                                        onPress={() => {
+                                                props.navigation.navigate("Create",
+                                                { _id, name, picture, phone, salary, email, position }
+                                                )}
+                                        }
+                                >
                                         Edit
                                 </Button>
 
