@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, Image, Linking, Platform, Alert } from "react-na
 import { LinearGradient } from "expo-linear-gradient";
 import { Title, Card, Button } from "react-native-paper";
 import { MaterialIcons, Entypo } from '@expo/vector-icons';
+import {ngrok_link} from '../ngrok'
 
 
 // 
@@ -18,9 +19,9 @@ const Profile = (props) => {
         const { _id, name, picture, phone, salary, email, position} = props.route.params.item;
 
 
-        const fireEmployee = (id) => {
+        const fireEmployee = () => {
 
-                fetch('http://2767-129-205-124-94.eu.ngrok.io/delete', {
+                fetch(ngrok_link + 'delete', {
         
                         method: "POST",
                         headers: {

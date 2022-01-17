@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { Text, View, StyleSheet, Modal, Alert, KeyboardAvoidingView } from "react-native";
 import { TextInput, Button } from 'react-native-paper';
 import * as ImagePicker from 'expo-image-picker';
+import {ngrok_link} from '../ngrok'
 // import * as Permissions from 'expo-permissions';
 
 
 
-const CreateEmployee = () => {
+const CreateEmployee = ( { navigation : {navigate} } ) => {
 
         
         const [ name, setName ] = useState("name")
@@ -19,15 +20,15 @@ const CreateEmployee = () => {
         const [enableshift,setenableShift] = useState(false)
 
 
-        const submitData = ({navigation}) => {
+        const submitData = ( ) => {
 
-                fetch("http://2767-129-205-124-94.eu.ngrok.io/send-data", {
+                fetch(ngrok_link + "send-data", {
                         method: "post",
                         headers: {
                                 'Content-Type': 'application/json',
                               },
+                              // also that they are objects that is name: name
                         body: JSON.stringify({
-                                // also that they are objects that is name: name
                                 name,
                                 email,
                                 salary,
@@ -36,13 +37,12 @@ const CreateEmployee = () => {
                                 phone
                         })
                 })
-                .then(response => {
-                        response.json()
-                })
+                .then(res => res.json())
                 .then(data => {
                         Alert.alert(`${data.name} is saved successfully`)
-                        navigation.navigate("Home")
-                })
+                        navigate("Home")
+                        console.log('Success:', data);
+                      })
                 .catch(error => console.log(error))
                 
         }

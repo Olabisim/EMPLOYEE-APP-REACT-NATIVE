@@ -1,6 +1,7 @@
 import React, { useEffect, useState} from "react";
 import { StyleSheet, Text, View, Image, FlatList, ActivityIndicator, Alert} from "react-native";
 import { Card, FAB } from "react-native-paper";
+import {ngrok_link} from '../ngrok'
 
 
 const Home = ({navigation}) => {
@@ -10,13 +11,13 @@ const Home = ({navigation}) => {
 
        const fetchData = () => {
 
-                fetch("http://2767-129-205-124-94.eu.ngrok.io")
+                fetch(ngrok_link)
 
                         .then(res => res.json())
         
                         .then(results => {
                                 
-                                // console.log(results)
+                                // console.log(results) source
                                 setData(results)
                                 setLoading(false)
         
@@ -74,7 +75,7 @@ const Home = ({navigation}) => {
                                loading
                                ?
                                <ActivityIndicator size="large" color="#00ff00" />
-                               :
+                               :source
                 */} 
                                 <FlatList 
                                 
@@ -83,8 +84,7 @@ const Home = ({navigation}) => {
                                                 return renderList(item)
                                         }}
                                         keyExtractor={item => item._id}
-                                        onRefresh={() => submitData()}
-                                        // refreshing is a boolean value
+                                        onRefresh={() => fetchData()}
                                         refreshing= {loading}
                         
                                 />
