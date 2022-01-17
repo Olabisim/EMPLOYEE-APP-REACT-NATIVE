@@ -1,8 +1,9 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState, useContext} from "react";
 import { StyleSheet, Text, View, Image, FlatList, ActivityIndicator, Alert} from "react-native";
 import { Card, FAB } from "react-native-paper";
 import {ngrok_link} from '../ngrok'
 import { useSelector, useDispatch } from "react-redux";
+import { Mycontext } from '../App'
 
 
 const Home = ({navigation}) => {
@@ -10,11 +11,15 @@ const Home = ({navigation}) => {
 //        const [data, setData] = useState([])
 //        const [loading, setLoading] = useState(true)
 
-        const dispatch = useDispatch()
+        // const dispatch = useDispatch()
 
-        const { data, loading } = useSelector((state) => {
-                return state
-        })
+        // const { data, loading } = useSelector((state) => {
+        //         return state
+        // })
+
+        const {state, dispatch} = useContext(Mycontext)
+        const {loading, data} = state
+        console.log(data, loading)
 
 
        const fetchData = () => {
