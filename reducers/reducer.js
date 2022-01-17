@@ -1,15 +1,14 @@
 
 
-export const initialState = {
-
+const initialState = {
         data: [],
         loading: true
-
 }
 
 
 
-export const reducer = (state, action) => {
+
+export const reducer = (state = initialState, action) => {
 
         if( action.type == "ADD_DATA") {
                 return {
