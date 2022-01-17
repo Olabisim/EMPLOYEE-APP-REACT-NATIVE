@@ -2,12 +2,20 @@ import React, { useEffect, useState} from "react";
 import { StyleSheet, Text, View, Image, FlatList, ActivityIndicator, Alert} from "react-native";
 import { Card, FAB } from "react-native-paper";
 import {ngrok_link} from '../ngrok'
+import { useSelector, useDispatch } from "react-redux";
 
 
 const Home = ({navigation}) => {
 
-       const [data, setData] = useState([])
-       const [loading, setLoading] = useState(true)
+//        const [data, setData] = useState([])
+//        const [loading, setLoading] = useState(true)
+
+        const dispatch = useDispatch()
+
+        const { data, loading } = useSelector((state) => {
+                return state
+        })
+
 
        const fetchData = () => {
 
@@ -18,8 +26,11 @@ const Home = ({navigation}) => {
                         .then(results => {
                                 
                                 // console.log(results) source
-                                setData(results)
-                                setLoading(false)
+                                // setData(results)
+                                // setLoading(false)
+                                dispatch({ type: "ADD_DATA", payload: results})
+                                dispatch({ type: "SET_LOADING", payload: false})
+
         
                         })
                         .catch(error => Alert.alert("something went wrong"))
