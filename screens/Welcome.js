@@ -45,8 +45,8 @@ const Welcome = ({navigation : {navigate}}) => {
 
 
                         <T 
-                                style={{color: "blue", fontSize: 40}}
-                                onPress={() => navigate("Welcome")}      
+                                style={styles.text_link}
+                                onPress={() => navigate("Home")}      
                         >VIEW EMPLOYEES
                         </T>
 
@@ -83,6 +83,14 @@ const styles = SS.create({
         },
         svg_con: {
                 marginTop: '-70%'
+        },
+        text_link: {
+                color: "white", 
+                fontSize: 20,
+                backgroundColor: "blue",
+                // padding: '30px 60px',
+                borderRadius: 5,
+                // border: '1 solid blue'
         }
 
 
