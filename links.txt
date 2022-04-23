@@ -1,4 +1,4 @@
-https://docs.expo.dev/versions/latest/sdk/imagepicker/
+https://docs.expo.dev/versions/latest/sdk/imagepicker/ ****
 https://stackoverflow.com/questions/68668152/react-native-expo-permission-deprecated-what-to-use-now
 
 https://reactnavigation.org/docs/5.x/stack-navigator

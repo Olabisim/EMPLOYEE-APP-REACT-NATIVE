@@ -27,7 +27,7 @@ const Profile = (props) => {
                         headers: {
                                 'Content-Type': 'application/json',
                               },
-                        // the backend is just id while the _id is the present one
+                        // the backend is the id while the _id is the present one
                         body: JSON.stringify({id: _id}),
                             
                 })      

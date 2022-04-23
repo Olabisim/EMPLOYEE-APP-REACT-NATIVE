@@ -106,7 +106,7 @@ const Home = ({navigation}) => {
                                 small
                                 icon="plus"
                                 onPress={() => navigation.navigate("Create")}
-                                theme={{colors: {accent: "#000"}}}
+                                theme={{colors: {accent: "#00f"}}}
                         />
 
                 </View>
