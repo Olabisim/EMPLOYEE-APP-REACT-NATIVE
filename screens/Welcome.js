@@ -1,4 +1,4 @@
-import { View as V, Text as T, StyleSheet as SS, Image as I, ScrollView as SV, ImageBackground as IB} from 'react-native'
+import { View as V, Text as T, StyleSheet as SS, Image as I, ScrollView as SV, ImageBackground as IB, TouchableOpacity as TO} from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 import Svg, { Circle, Path } from 'react-native-svg';
 
@@ -11,7 +11,7 @@ const staticImage = require("../assets/LEAVES.svg")
                                 // <I source={staticImage} styles={styles.image_con} />
 const Welcome = ({navigation : {navigate}}) => {
         return (
-                <SV>
+                <V style={{flex: 1}}>
                 
                         <V style={styles.main_div}>
 
@@ -42,16 +42,27 @@ const Welcome = ({navigation : {navigate}}) => {
                         </V>
 
 
+                        <V style={styles.sec_con}>
+                        
+                        
+                                <TO
+                                        style={styles.text_link}
+                                        onPress={() => navigate("Home")}      
+                                >
 
-
-                        <T 
-                                style={styles.text_link}
-                                onPress={() => navigate("Home")}      
-                        >VIEW EMPLOYEES
-                        </T>
+                                        <T
+                                                style={styles.text_link_text}
+                                        >
+                                                VIEW EMPLOYEES
+                                        </T>
+                                
+                                </TO>
 
                         </V>
-                </SV>
+
+
+                        </V>
+                </V>
 
 
         )
@@ -82,16 +93,25 @@ const styles = SS.create({
                 alignItems: "center",
         },
         svg_con: {
-                marginTop: '-70%'
+                flex: 2,
+                // backgroundColor: 'green',
+        },
+        sec_con: {
+                flex: 1,
+                // backgroundColor: "red"
         },
         text_link: {
                 color: "white", 
-                fontSize: 20,
                 backgroundColor: "blue",
-                // padding: '30px 60px',
                 borderRadius: 5,
-                // border: '1 solid blue'
-        }
+                paddingHorizontal: 22,
+                paddingVertical: 11
+        },
+        text_link_text: {
+                color: "white",
+                paddingHorizontal: 10,
+                paddingVertical: 5,
+        },
 
 
 })
